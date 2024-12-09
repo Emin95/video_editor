@@ -1,4 +1,4 @@
-package com.example.video_editor
+package com.custom.video_editor
 
 import io.flutter.embedding.android.FlutterActivity
 
