@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -8,13 +8,13 @@ class ImageViewer extends StatelessWidget {
   const ImageViewer({
     super.key,
     required this.controller,
-    required this.file,
+    required this.bytes,
     this.child,
     this.fadeIn = true,
   });
 
   final VideoEditorController controller;
-  final File file;
+  final Uint8List bytes;
   final Widget? child;
   final bool fadeIn;
 
@@ -28,11 +28,11 @@ class ImageViewer extends StatelessWidget {
             child: fadeIn
                 ? FadeInImage(
                     fadeInDuration: const Duration(milliseconds: 400),
-                    image: FileImage(file),
+                    image: MemoryImage(bytes),
                     placeholder: MemoryImage(kTransparentImage),
                   )
-                : Image.file(
-                    file,
+                : Image.memory(
+                    bytes,
                     color: const Color.fromRGBO(255, 255, 255, 0.2),
                     colorBlendMode: BlendMode.modulate,
                   ),

@@ -114,7 +114,7 @@ class _CoverSelectionState extends State<CoverSelection>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final wrap = widget.wrap ?? const Wrap();
+    final wrap = widget.wrap ?? Wrap();
 
     return StreamBuilder<List<CoverData>>(
         stream: _stream,
@@ -190,7 +190,7 @@ class _CoverSelectionState extends State<CoverSelection>
                 transform: transform,
                 child: ImageViewer(
                   controller: widget.controller,
-                  file: cover.file!,
+                  bytes: cover.thumbData!,
                   child: LayoutBuilder(builder: (_, constraints) {
                     Size size = constraints.biggest;
                     if (_layout != size) {

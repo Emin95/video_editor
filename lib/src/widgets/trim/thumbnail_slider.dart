@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:video_editor/src/controller.dart';
@@ -40,7 +40,7 @@ class _ThumbnailSliderState extends State<ThumbnailSlider> {
   int _thumbnailsCount = 8;
   late int _neededThumbnails = _thumbnailsCount;
 
-  late Stream<List<File>> _stream = (() => _generateThumbnails())();
+  late Stream<List<Uint8List>> _stream = (() => _generateThumbnails())();
 
   @override
   void initState() {
@@ -75,8 +75,8 @@ class _ThumbnailSliderState extends State<ThumbnailSlider> {
     }
   }
 
-  Stream<List<File>> _generateThumbnails() => generateTrimThumbnails(
-        widget.controller.file.path,
+  Stream<List<Uint8List>> _generateThumbnails() => generateTrimThumbnails(
+        widget.controller,
         quantity: _thumbnailsCount,
       );
 
@@ -102,7 +102,7 @@ class _ThumbnailSliderState extends State<ThumbnailSlider> {
     return LayoutBuilder(builder: (_, box) {
       _sliderWidth = box.maxWidth;
 
-      return StreamBuilder<List<File>>(
+      return StreamBuilder<List<Uint8List>>(
         stream: _stream,
         builder: (_, snapshot) {
           final data = snapshot.data;
@@ -143,7 +143,7 @@ class _ThumbnailSliderState extends State<ThumbnailSlider> {
   }
 
   Widget _buildSingleThumbnail(
-    File file,
+    Uint8List bytes,
     TransformData transform, {
     required bool isPlaceholder,
   }) {
@@ -153,7 +153,7 @@ class _ThumbnailSliderState extends State<ThumbnailSlider> {
         transform: transform,
         child: ImageViewer(
           controller: widget.controller,
-          file: file,
+          bytes: bytes,
           fadeIn: !isPlaceholder,
           child: LayoutBuilder(builder: (_, constraints) {
             final size = constraints.biggest;

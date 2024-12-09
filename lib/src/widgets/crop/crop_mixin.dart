@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:video_editor/src/controller.dart';
@@ -78,7 +78,7 @@ mixin CropPreviewMixin<T extends StatefulWidget> on State<T> {
   /// Paint rect on top of the video area outside of the crop rect
   Widget buildImageView(
     VideoEditorController controller,
-    File file,
+    Uint8List bytes,
     TransformData transform,
   ) {
     return SizedBox.fromSize(
@@ -88,7 +88,7 @@ mixin CropPreviewMixin<T extends StatefulWidget> on State<T> {
         transform: transform,
         child: ImageViewer(
           controller: controller,
-          file: file,
+          bytes: bytes,
           child:
               buildPaint(controller, showGrid: false, showCenterRects: false),
         ),

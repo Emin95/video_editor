@@ -37,7 +37,8 @@ dependencies:
   transparent_image: ^2.0.1 # show fade-in placeholder in thumbnails generation
   video_player: ^2.6.1
   ffmpeg_kit_flutter_full_gpl: ^6.0.3
-  file_picker: ^8.1.4
+  # file_picker: ^8.1.4
+  flutter_video_thumbnail_plus: ^1.0.5
 
 
   # The following adds the Cupertino Icons font to your application.
